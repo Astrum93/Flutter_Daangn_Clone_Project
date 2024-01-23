@@ -28,6 +28,14 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ListView(
+      controller: scrollController,
+      children: [
+        Container(height: 500, color: Colors.red),
+        Container(height: 500, color: Colors.blue),
+        Container(height: 500, color: Colors.red),
+        Container(height: 500, color: Colors.blue),
+      ],
+    );
   }
 }
