@@ -18,6 +18,7 @@ class FloatingDaangnButton extends ConsumerWidget {
     return Stack(
       children: [
         IgnorePointer(
+          ignoring: !isExpanded,
           child: AnimatedContainer(
             duration: duration,
             color:
