@@ -17,10 +17,12 @@ class FloatingDaangnButton extends ConsumerWidget {
     final isSmall = ref.watch(floatingButtonIsSmallProvider);
     return Stack(
       children: [
-        AnimatedContainer(
-          duration: duration,
-          color:
-              isExpanded ? Colors.black.withOpacity(0.4) : Colors.transparent,
+        IgnorePointer(
+          child: AnimatedContainer(
+            duration: duration,
+            color:
+                isExpanded ? Colors.black.withOpacity(0.4) : Colors.transparent,
+          ),
         ),
         Align(
           alignment: Alignment.bottomRight,
