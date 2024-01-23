@@ -21,6 +21,22 @@ final floatingButtonStateProvider =
 /// State를 감지하는 Notifier
 class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
   FloatingButtonStateNotifier(super.state);
+
+  @override
+  bool updateShouldNotify(
+      FloatingButtonState old, FloatingButtonState current) {
+    return true;
+  }
+
+  void onTapButton() {
+    state = state
+      ..isExpanded = !state.isExpanded
+      ..isSmall = true;
+  }
+
+  void changeButtonSize(bool isSmall) {
+    state = state..isSmall = isSmall;
+  }
 }
 
 /// 개별로 State를 관리하고 싶은 경우
