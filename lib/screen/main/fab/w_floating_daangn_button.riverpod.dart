@@ -1,20 +1,20 @@
+import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// 기존의 State
 /// State를 같이 관리하고 싶은 경우
-class FloatingButtonState {
-  bool isExpanded;
-  bool isSmall;
-
-  FloatingButtonState()
-      : isExpanded = false,
-        isSmall = false;
-}
+// class FloatingButtonState {
+//   bool isExpanded;
+//   bool isSmall;
+//
+//   FloatingButtonState(this.isExpanded, this.isSmall);
+// }
 
 /// State와 Notifier를 가진 Provider
 final floatingButtonStateProvider =
     StateNotifierProvider<FloatingButtonStateNotifier, FloatingButtonState>(
   (ref) => FloatingButtonStateNotifier(
-    FloatingButtonState(),
+    const FloatingButtonState(false, false),
   ),
 );
 
@@ -22,20 +22,19 @@ final floatingButtonStateProvider =
 class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
   FloatingButtonStateNotifier(super.state);
 
-  @override
-  bool updateShouldNotify(
-      FloatingButtonState old, FloatingButtonState current) {
-    return true;
-  }
+  /// freezed로 State 관리 후 생략 가능
+  // @override
+  // bool updateShouldNotify(
+  //     FloatingButtonState old, FloatingButtonState current) {
+  //   return true;
+  // }
 
   void onTapButton() {
-    state = state
-      ..isExpanded = !state.isExpanded
-      ..isSmall = true;
+    state = state.copyWith(isExpanded: !state.isExpanded, isSmall: true);
   }
 
   void changeButtonSize(bool isSmall) {
-    state = state..isSmall = isSmall;
+    state = state.copyWith(isSmall: isSmall);
   }
 }
 
