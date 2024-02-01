@@ -23,7 +23,7 @@ class MainScreenState extends ConsumerState<MainScreen>
   late final List<GlobalKey<NavigatorState>> navigatorKeys =
       TabItem.values.map((e) => GlobalKey<NavigatorState>()).toList();
 
-  TabItem get _currentTab => ref.read(currentTabProvider);
+  TabItem get _currentTab => ref.watch(currentTabProvider);
 
   int get _currentIndex => tabs.indexOf(_currentTab);
 
@@ -128,13 +128,11 @@ class MainScreenState extends ConsumerState<MainScreen>
   }
 
   List<BottomNavigationBarItem> navigationBarItems(BuildContext context) {
-    final currentTab = ref.watch(currentTabProvider);
-    final currentIndex = tabs.indexOf(currentTab);
     return tabs
         .mapIndexed(
           (tab, index) => tab.toNavigationBarItem(
             context,
-            isActivated: currentIndex == index,
+            isActivated: _currentIndex == index,
           ),
         )
         .toList();
