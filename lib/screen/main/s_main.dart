@@ -1,3 +1,4 @@
+import 'package:fast_app_base/common/cli_common.dart';
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/main/tab/tab_navigator.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,11 @@ class MainScreenState extends State<MainScreen>
                 ),
                 bottomNavigationBar: _buildBottomNavigationBar(context),
               ),
-              FloatingDaangnButton(),
+              AnimatedOpacity(
+                opacity: _currentTab != TabItem.chat ? 1 : 0,
+                duration: 300.ms,
+                child: FloatingDaangnButton(),
+              )
             ],
           ),
         ),
