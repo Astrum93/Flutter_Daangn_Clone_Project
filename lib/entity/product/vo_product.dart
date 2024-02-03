@@ -13,5 +13,7 @@ class Product with _$Product {
     final int price,
     final String description,
     final ProductStatus status,
+    final List<String> images,
+    final DateTime createdTime,
   ) = _Product;
 }

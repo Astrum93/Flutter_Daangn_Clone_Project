@@ -21,6 +21,8 @@ mixin _$Product {
   int get price => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   ProductStatus get status => throw _privateConstructorUsedError;
+  List<String> get images => throw _privateConstructorUsedError;
+  DateTime get createdTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductCopyWith<Product> get copyWith => throw _privateConstructorUsedError;
@@ -36,7 +38,9 @@ abstract class $ProductCopyWith<$Res> {
       String name,
       int price,
       String description,
-      ProductStatus status});
+      ProductStatus status,
+      List<String> images,
+      DateTime createdTime});
 
   $UserCopyWith<$Res> get user;
 }
@@ -59,6 +63,8 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? price = null,
     Object? description = null,
     Object? status = null,
+    Object? images = null,
+    Object? createdTime = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
@@ -81,6 +87,14 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ProductStatus,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      createdTime: null == createdTime
+          ? _value.createdTime
+          : createdTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 
@@ -105,7 +119,9 @@ abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
       String name,
       int price,
       String description,
-      ProductStatus status});
+      ProductStatus status,
+      List<String> images,
+      DateTime createdTime});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -126,6 +142,8 @@ class __$$_ProductCopyWithImpl<$Res>
     Object? price = null,
     Object? description = null,
     Object? status = null,
+    Object? images = null,
+    Object? createdTime = null,
   }) {
     return _then(_$_Product(
       null == user
@@ -148,6 +166,14 @@ class __$$_ProductCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ProductStatus,
+      null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      null == createdTime
+          ? _value.createdTime
+          : createdTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -155,8 +181,9 @@ class __$$_ProductCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Product implements _Product {
-  const _$_Product(
-      this.user, this.name, this.price, this.description, this.status);
+  const _$_Product(this.user, this.name, this.price, this.description,
+      this.status, final List<String> images, this.createdTime)
+      : _images = images;
 
   @override
   final User user;
@@ -168,10 +195,20 @@ class _$_Product implements _Product {
   final String description;
   @override
   final ProductStatus status;
+  final List<String> _images;
+  @override
+  List<String> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
+
+  @override
+  final DateTime createdTime;
 
   @override
   String toString() {
-    return 'Product(user: $user, name: $name, price: $price, description: $description, status: $status)';
+    return 'Product(user: $user, name: $name, price: $price, description: $description, status: $status, images: $images, createdTime: $createdTime)';
   }
 
   @override
@@ -184,12 +221,15 @@ class _$_Product implements _Product {
             (identical(other.price, price) || other.price == price) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
+            (identical(other.createdTime, createdTime) ||
+                other.createdTime == createdTime));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, user, name, price, description, status);
+  int get hashCode => Object.hash(runtimeType, user, name, price, description,
+      status, const DeepCollectionEquality().hash(_images), createdTime);
 
   @JsonKey(ignore: true)
   @override
@@ -199,8 +239,14 @@ class _$_Product implements _Product {
 }
 
 abstract class _Product implements Product {
-  const factory _Product(final User user, final String name, final int price,
-      final String description, final ProductStatus status) = _$_Product;
+  const factory _Product(
+      final User user,
+      final String name,
+      final int price,
+      final String description,
+      final ProductStatus status,
+      final List<String> images,
+      final DateTime createdTime) = _$_Product;
 
   @override
   User get user;
@@ -212,6 +258,10 @@ abstract class _Product implements Product {
   String get description;
   @override
   ProductStatus get status;
+  @override
+  List<String> get images;
+  @override
+  DateTime get createdTime;
   @override
   @JsonKey(ignore: true)
   _$$_ProductCopyWith<_$_Product> get copyWith =>
