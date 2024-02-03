@@ -56,7 +56,21 @@ class FloatingDaangnButton extends ConsumerWidget {
               ),
               Tap(
                 onTap: () {
-                  ref.read(floatingButtonStateProvider.notifier).onTapButton();
+                  // final currentTab = ref.read(currentTabProvider);
+                  // debugPrint(currentTab.tabName);
+                  // switch (currentTab) {
+                  //   case TabItem.home:
+                  //   case TabItem.localLife:
+                  //   // 다른 화면 띄우기 가능
+                  //   // TODO: Handle this case.
+                  //   case TabItem.nearMe:
+                  //   // TODO: Handle this case.
+                  //   case TabItem.chat:
+                  //   // TODO: Handle this case.
+                  //   case TabItem.my:
+                  //   // TODO: Handle this case.
+                  // }
+                  ref.read(floatingButtonStateProvider.notifier).toggleMenu();
                 },
                 child: AnimatedContainer(
                   duration: duration,
