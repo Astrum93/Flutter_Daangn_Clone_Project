@@ -22,7 +22,6 @@ mixin _$Product {
   String get description => throw _privateConstructorUsedError;
   ProductStatus get status => throw _privateConstructorUsedError;
   List<String> get images => throw _privateConstructorUsedError;
-  DateTime get createdTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductCopyWith<Product> get copyWith => throw _privateConstructorUsedError;
@@ -39,8 +38,7 @@ abstract class $ProductCopyWith<$Res> {
       int price,
       String description,
       ProductStatus status,
-      List<String> images,
-      DateTime createdTime});
+      List<String> images});
 
   $UserCopyWith<$Res> get user;
 }
@@ -64,7 +62,6 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? description = null,
     Object? status = null,
     Object? images = null,
-    Object? createdTime = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
@@ -91,10 +88,6 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      createdTime: null == createdTime
-          ? _value.createdTime
-          : createdTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ) as $Val);
   }
 
@@ -108,10 +101,10 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
 }
 
 /// @nodoc
-abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
-  factory _$$_ProductCopyWith(
-          _$_Product value, $Res Function(_$_Product) then) =
-      __$$_ProductCopyWithImpl<$Res>;
+abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
+  factory _$$ProductImplCopyWith(
+          _$ProductImpl value, $Res Function(_$ProductImpl) then) =
+      __$$ProductImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -120,18 +113,18 @@ abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
       int price,
       String description,
       ProductStatus status,
-      List<String> images,
-      DateTime createdTime});
+      List<String> images});
 
   @override
   $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$_ProductCopyWithImpl<$Res>
-    extends _$ProductCopyWithImpl<$Res, _$_Product>
-    implements _$$_ProductCopyWith<$Res> {
-  __$$_ProductCopyWithImpl(_$_Product _value, $Res Function(_$_Product) _then)
+class __$$ProductImplCopyWithImpl<$Res>
+    extends _$ProductCopyWithImpl<$Res, _$ProductImpl>
+    implements _$$ProductImplCopyWith<$Res> {
+  __$$ProductImplCopyWithImpl(
+      _$ProductImpl _value, $Res Function(_$ProductImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -143,9 +136,8 @@ class __$$_ProductCopyWithImpl<$Res>
     Object? description = null,
     Object? status = null,
     Object? images = null,
-    Object? createdTime = null,
   }) {
-    return _then(_$_Product(
+    return _then(_$ProductImpl(
       null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -170,19 +162,15 @@ class __$$_ProductCopyWithImpl<$Res>
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      null == createdTime
-          ? _value.createdTime
-          : createdTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_Product implements _Product {
-  const _$_Product(this.user, this.name, this.price, this.description,
-      this.status, final List<String> images, this.createdTime)
+class _$ProductImpl implements _Product {
+  const _$ProductImpl(this.user, this.name, this.price, this.description,
+      this.status, final List<String> images)
       : _images = images;
 
   @override
@@ -204,38 +192,33 @@ class _$_Product implements _Product {
   }
 
   @override
-  final DateTime createdTime;
-
-  @override
   String toString() {
-    return 'Product(user: $user, name: $name, price: $price, description: $description, status: $status, images: $images, createdTime: $createdTime)';
+    return 'Product(user: $user, name: $name, price: $price, description: $description, status: $status, images: $images)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Product &&
+            other is _$ProductImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality().equals(other._images, _images) &&
-            (identical(other.createdTime, createdTime) ||
-                other.createdTime == createdTime));
+            const DeepCollectionEquality().equals(other._images, _images));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, user, name, price, description,
-      status, const DeepCollectionEquality().hash(_images), createdTime);
+      status, const DeepCollectionEquality().hash(_images));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductCopyWith<_$_Product> get copyWith =>
-      __$$_ProductCopyWithImpl<_$_Product>(this, _$identity);
+  _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
+      __$$ProductImplCopyWithImpl<_$ProductImpl>(this, _$identity);
 }
 
 abstract class _Product implements Product {
@@ -245,8 +228,7 @@ abstract class _Product implements Product {
       final int price,
       final String description,
       final ProductStatus status,
-      final List<String> images,
-      final DateTime createdTime) = _$_Product;
+      final List<String> images) = _$ProductImpl;
 
   @override
   User get user;
@@ -261,9 +243,7 @@ abstract class _Product implements Product {
   @override
   List<String> get images;
   @override
-  DateTime get createdTime;
-  @override
   @JsonKey(ignore: true)
-  _$$_ProductCopyWith<_$_Product> get copyWith =>
+  _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

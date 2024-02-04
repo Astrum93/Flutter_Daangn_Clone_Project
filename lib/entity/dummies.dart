@@ -2,6 +2,7 @@ import 'package:fast_app_base/common/cli_common.dart';
 import 'package:fast_app_base/entity/post/vo_product_post.dart';
 import 'package:fast_app_base/entity/product/product_status.dart';
 import 'package:fast_app_base/entity/product/vo_product.dart';
+import 'package:fast_app_base/entity/user/vo_address.dart';
 import 'package:fast_app_base/entity/user/vo_user.dart';
 
 /// 이미지 생성 함수
@@ -49,14 +50,14 @@ final product3 = Product(
 );
 
 /// 게시물 더미 데이터
-final post1 =
-    ProductPost(product1.user, product1, '글의 내용입니다.', '서울 특별시 성수동', 3, 2);
+final post1 = ProductPost(product1.user, product1, '글의 내용입니다.',
+    const Address('서울시 특별한 주소', '플러터 동'), 3, 2);
 
-final post2 = ProductPost(
-    product2.user, product2, '갤럭시 신제품, 완전 새 제품, 네고X', '서울 특별시 강남구', 50, 2500);
+final post2 = ProductPost(product2.user, product2, '갤럭시 신제품, 완전 새 제품, 네고X',
+    const Address('서울시 특별한 주소', '다트 시'), 50, 2500);
 
-final post3 =
-    ProductPost(product3.user, product3, '울트라 대형 티비, 깨끗함', '경기도 일산', 22, 20);
+final post3 = ProductPost(product3.user, product3, '울트라 대형 티비, 깨끗함',
+    const Address('서울시 특별한 주소', '앱 동'), 22, 20);
 
 ///
 final postList = [post1, post2, post3, post1, post2, post3];
