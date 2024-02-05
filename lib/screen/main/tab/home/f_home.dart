@@ -1,5 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/dummies.dart';
+import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.dart';
 import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.riverpod.dart';
 import 'package:fast_app_base/screen/main/tab/home/w_product_post_item.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
         ),
         Expanded(
           child: ListView.separated(
+            padding: const EdgeInsets.only(bottom: FloatingDaangnButton.height),
             controller: scrollController,
             itemBuilder: (context, index) => ProductPostItem(postList[index]),
             itemCount: postList.length,
