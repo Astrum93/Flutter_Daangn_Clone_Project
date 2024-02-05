@@ -37,9 +37,11 @@ class ProductPostItem extends StatelessWidget {
                       .format(post.createdTime,
                           locale: context.locale.languageCode)
                       .text
+                      .color(context.appColors.lessImportantColor)
                       .make()
                 ],
-              )
+              ),
+              post.product.price.toWon().text.bold.make(),
             ],
           ),
         )
