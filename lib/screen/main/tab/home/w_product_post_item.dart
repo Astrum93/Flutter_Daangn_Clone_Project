@@ -34,7 +34,8 @@ class ProductPostItem extends StatelessWidget {
                       .make(),
                   '•'.text.color(context.appColors.lessImportantColor).make(),
                   timeago
-                      .format(post.cre, locale: context.locale.languageCode)
+                      .format(post.createdTime,
+                          locale: context.locale.languageCode)
                       .text
                       .make()
                 ],

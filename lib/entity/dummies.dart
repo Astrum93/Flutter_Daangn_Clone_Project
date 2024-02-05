@@ -26,7 +26,6 @@ final product1 = Product(
   '깨끗하게 잘 쓰던 물건이에요. 잘 쓰면 좋겠습니다. 감사합니다.',
   ProductStatus.normal,
   [picSum(100), picSum(201), picSum(103)],
-  DateTime.now().subtract(30.minutes),
 );
 
 final product2 = Product(
@@ -36,7 +35,6 @@ final product2 = Product(
   '새로운 갤럭시 모델 갤럭시 S24 Ultra와 함께 해보세요!!!',
   ProductStatus.normal,
   [picSum(999), picSum(888), picSum(777)],
-  DateTime.now().subtract(5.minutes),
 );
 
 final product3 = Product(
@@ -46,18 +44,38 @@ final product3 = Product(
   '깨끗하게 잘 쓰던 물건이에요.',
   ProductStatus.normal,
   [picSum(500), picSum(501), picSum(502), picSum(503)],
-  DateTime.now().subtract(10.seconds),
 );
 
 /// 게시물 더미 데이터
-final post1 = ProductPost(product1.user, product1, '글의 내용입니다.',
-    const Address('서울시 특별한 주소', '플러터 동'), 3, 2);
+final post1 = ProductPost(
+  product1.user,
+  product1,
+  '글의 내용입니다.',
+  const Address('서울시 특별한 주소', '플러터 동'),
+  3,
+  2,
+  DateTime.now().subtract(30.minutes),
+);
 
-final post2 = ProductPost(product2.user, product2, '갤럭시 신제품, 완전 새 제품, 네고X',
-    const Address('서울시 특별한 주소', '다트 시'), 50, 2500);
+final post2 = ProductPost(
+  product2.user,
+  product2,
+  '갤럭시 신제품, 완전 새 제품, 네고X',
+  const Address('서울시 특별한 주소', '다트 시'),
+  50,
+  2500,
+  DateTime.now().subtract(5.minutes),
+);
 
-final post3 = ProductPost(product3.user, product3, '울트라 대형 티비, 깨끗함',
-    const Address('서울시 특별한 주소', '앱 동'), 22, 20);
+final post3 = ProductPost(
+  product3.user,
+  product3,
+  '울트라 대형 티비, 깨끗함',
+  const Address('서울시 특별한 주소', '앱 동'),
+  22,
+  20,
+  DateTime.now().subtract(10.seconds),
+);
 
 ///
 final postList = [post1, post2, post3, post1, post2, post3];
