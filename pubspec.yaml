@@ -76,6 +76,7 @@ dependencies:
   flutter_riverpod: ^2.4.9
   timeago: ^3.6.1
   flutter_hooks: ^0.20.5
+  hooks_riverpod: ^2.4.10
 
 dev_dependencies:
   flutter_test:
