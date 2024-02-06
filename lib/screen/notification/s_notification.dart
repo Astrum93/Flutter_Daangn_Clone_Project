@@ -12,27 +12,33 @@ class NotificationScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tabController = useTabController(initialLength: 2);
     final isEditMode = ref.watch(notificationEditModeProvider);
-    return Column(
-      children: [
-        AppBar(
-          title: '알림'.text.make(),
-          actions: [
-            Tap(
-              onTap: () {
-                ref.read(notificationEditModeProvider.notifier).state =
-                    !isEditMode;
-              },
-              child: (isEditMode ? '완료' : '편집').text.make().p(10),
+    return Material(
+      child: Column(
+        children: [
+          AppBar(
+            title: '알림'.text.make(),
+            actions: [
+              Tap(
+                onTap: () {
+                  ref.read(notificationEditModeProvider.notifier).state =
+                      !isEditMode;
+                },
+                child: (isEditMode ? '완료' : '편집').text.make().p(10),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 80,
+            child: TabBar(
+              controller: tabController,
+              tabs: [
+                '활동 알림'.text.make(),
+                '키워드 알림'.text.make(),
+              ],
             ),
-          ],
-        ),
-        TabBarView(
-          children: [
-            '활동 알림'.text.make(),
-            '키워드 알림'.text.make(),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }
