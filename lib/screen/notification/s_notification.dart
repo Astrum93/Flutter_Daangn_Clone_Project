@@ -1,4 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/notification/f_notification_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,16 +28,22 @@ class NotificationScreen extends HookConsumerWidget {
               ),
             ],
           ),
-          SizedBox(
-            height: 80,
-            child: TabBar(
-              controller: tabController,
-              tabs: [
-                '활동 알림'.text.make(),
-                '키워드 알림'.text.make(),
-              ],
-            ),
+          TabBar(
+            controller: tabController,
+            tabs: ['활동 알림'.text.white.make(), '키워드 알림'.text.white.make()],
+            labelStyle: const TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+            labelPadding: const EdgeInsets.symmetric(vertical: 20),
+            indicatorColor: Colors.white,
           ),
+          Expanded(
+              child: TabBarView(
+            controller: tabController,
+            children: [
+              const NotificationFragment(),
+              Container(color: Colors.red),
+            ],
+          ))
         ],
       ),
     );
