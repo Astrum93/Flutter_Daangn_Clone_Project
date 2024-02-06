@@ -51,6 +51,12 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
                 .toList(),
             child: Text(title),
           ),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.notifications_none_rounded),
+            )
+          ],
         ),
         Expanded(
           child: ListView.separated(
