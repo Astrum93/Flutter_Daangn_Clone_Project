@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/network/daangn_api.dart';
 
-final remoteNotificationProvider =
-    FutureProviderFamily<ProductPost, int>((ref, id) async {
+final productPostProvider =
+    AutoDisposeFutureProviderFamily<ProductPost, int>((ref, id) async {
   return await DaangnApi.getPost(id);
 });
