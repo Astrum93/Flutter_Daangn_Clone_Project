@@ -15,7 +15,7 @@ class ProductPostItem extends StatelessWidget {
     return Tap(
       onTap: () {
         // 상세 페이지
-        Nav.push(PostDetailScreen(post.id));
+        Nav.push(PostDetailScreen(post.id, simpleProductPost: post));
       },
       child: Stack(
         children: [
