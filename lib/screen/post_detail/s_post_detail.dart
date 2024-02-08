@@ -4,7 +4,9 @@ import 'package:fast_app_base/entity/post/vo_product_post.dart';
 import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
 import 'package:fast_app_base/screen/post_detail/provider/product_post_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PostDetailScreen extends ConsumerWidget {
   final SimpleProductPost? simpleProductPost;
@@ -32,7 +34,7 @@ class PostDetailScreen extends ConsumerWidget {
   }
 }
 
-class _PostDetail extends StatelessWidget {
+class _PostDetail extends HookWidget {
   final SimpleProductPost simpleProductPost;
   final ProductPost? productPost;
 
@@ -42,23 +44,39 @@ class _PostDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: context.deviceWidth,
-                child: Stack(
-                  children: [
-                    PageView(
-                      children: simpleProductPost.product.images
-                          .map((url) => CachedNetworkImage(
-                              imageUrl: url, fit: BoxFit.fill))
-                          .toList(),
-                    ),
-                  ],
-                ),
-              )
-            ],
+        Positioned.fill(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  width: context.deviceWidth,
+                  height: context.deviceHeight,
+                  child: Stack(
+                    children: [
+                      PageView(
+                        children: simpleProductPost.product.images
+                            .map(
+                              (url) => CachedNetworkImage(
+                                imageUrl: url,
+                                fit: BoxFit.fill,
+                              ),
+                            )
+                            .toList(),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: SmoothPageIndicator(
+                          controller: controller,
+                          count: 6,
+                          effect: const WormEffect(),
+                          onDotClicked: (index) {},
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         const _AppBar(),
