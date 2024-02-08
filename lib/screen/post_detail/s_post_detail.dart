@@ -45,32 +45,37 @@ class _PostDetail extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final pageController = usePageController();
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                _ImagePager(
-                    pageController: pageController,
-                    simpleProductPost: simpleProductPost),
-                UserProfileWidget(simpleProductPost.product.user),
-                PostContent(
-                    simpleProductPost: simpleProductPost,
-                    productPost: productPost),
-              ],
+    return Material(
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _ImagePager(
+                      pageController: pageController,
+                      simpleProductPost: simpleProductPost),
+                  UserProfileWidget(
+                    simpleProductPost.product.user,
+                    address: simpleProductPost.address,
+                  ),
+                  PostContent(
+                      simpleProductPost: simpleProductPost,
+                      productPost: productPost),
+                ],
+              ),
             ),
           ),
-        ),
-        const _AppBar(),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            height: 100,
-            color: Colors.blue,
-          ),
-        )
-      ],
+          const _AppBar(),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: 100,
+              color: Colors.blue,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -137,7 +142,8 @@ class _AppBar extends StatelessWidget {
         backgroundColor: Colors.transparent,
         leading: IconButton(
             onPressed: () {},
-            icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white)),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                color: Colors.white)),
         actions: [
           IconButton(
               onPressed: () {},
