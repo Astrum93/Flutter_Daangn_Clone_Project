@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/post/vo_product_post.dart';
 import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
@@ -39,6 +40,36 @@ class _PostDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Stack(
+      children: [
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: context.deviceWidth,
+                child: PageView(
+                  children: simpleProductPost.product.images
+                      .map((url) => CachedNetworkImage(imageUrl: url))
+                      .toList(),
+                ),
+              )
+            ],
+          ),
+        ),
+        AppBar(
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+          ],
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            height: 100,
+            color: Colors.blue,
+          ),
+        )
+      ],
+    );
   }
 }
