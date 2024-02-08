@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/post/vo_product_post.dart';
 import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
@@ -21,12 +20,13 @@ class PostDetailScreen extends ConsumerWidget {
     final productPost = ref.watch(productPostProvider(id));
 
     return productPost.when(
-      data: (data) => CachedNetworkImage(
-          imageUrl: data.simpleProductPost.product.images[0]),
+      data: (data) => _PostDetail(data.simpleProductPost),
       error: (error, trace) => '에러발생'.text.make(),
-      loading: () => Center(
-        child: CircularProgressIndicator(),
-      ),
+      loading: () => simpleProductPost != null
+          ? _PostDetail(simpleProductPost!)
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
     );
   }
 }
