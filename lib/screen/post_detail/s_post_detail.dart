@@ -56,11 +56,15 @@ class _PostDetail extends StatelessWidget {
             ],
           ),
         ),
-        AppBar(
-          actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
-          ],
+        SizedBox(
+          /// AppBar 영역 확보를 위해 statusBar의 높이를 보장.
+          height: 60 + context.statusBarHeight,
+          child: AppBar(
+            actions: [
+              IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+            ],
+          ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
