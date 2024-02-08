@@ -47,25 +47,21 @@ class _PostDetail extends StatelessWidget {
             children: [
               SizedBox(
                 height: context.deviceWidth,
-                child: PageView(
-                  children: simpleProductPost.product.images
-                      .map((url) => CachedNetworkImage(imageUrl: url))
-                      .toList(),
+                child: Stack(
+                  children: [
+                    PageView(
+                      children: simpleProductPost.product.images
+                          .map((url) => CachedNetworkImage(
+                              imageUrl: url, fit: BoxFit.fill))
+                          .toList(),
+                    ),
+                  ],
                 ),
               )
             ],
           ),
         ),
-        SizedBox(
-          /// AppBar 영역 확보를 위해 statusBar의 높이를 보장.
-          height: 60 + context.statusBarHeight,
-          child: AppBar(
-            actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
-            ],
-          ),
-        ),
+        const _AppBar(),
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
@@ -74,6 +70,41 @@ class _PostDetail extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+}
+
+class _AppBar extends StatelessWidget {
+  const _AppBar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      /// AppBar 영역 확보를 위해 statusBar의 높이를 보장.
+      height: 60 + context.statusBarHeight,
+
+      child: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white)),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.share,
+                color: Colors.white,
+              )),
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.more_vert,
+                color: Colors.white,
+              )),
+        ],
+      ),
     );
   }
 }
