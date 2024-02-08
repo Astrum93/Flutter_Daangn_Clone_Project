@@ -7,7 +7,7 @@ import 'package:fast_app_base/entity/user/vo_user.dart';
 
 /// 이미지 생성 함수
 String picSum(int id) {
-  return 'https://picsum.photos/id/$id/411/411';
+  return 'https://picsum.photos/id/$id/200/200';
 }
 
 /// 유저 더미 데이터
