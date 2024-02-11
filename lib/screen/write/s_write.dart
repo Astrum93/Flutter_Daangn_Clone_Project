@@ -18,6 +18,22 @@ class _WriteScreenState extends State<WriteScreen> with KeyboardDetector {
   final priceController = TextEditingController();
   final descriptionController = TextEditingController();
 
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    titleController.addListener(() {
+      setState(() {});
+    });
+    priceController.addListener(() {
+      setState(() {});
+    });
+    descriptionController.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +47,7 @@ class _WriteScreenState extends State<WriteScreen> with KeyboardDetector {
         ],
       ),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 150),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -41,6 +58,7 @@ class _WriteScreenState extends State<WriteScreen> with KeyboardDetector {
             _TitleEditor(titleController),
             height30,
             _PriceEditor(priceController),
+            height30,
             _DescEditor(descriptionController),
           ],
         ).pSymmetric(h: 15),
@@ -50,8 +68,24 @@ class _WriteScreenState extends State<WriteScreen> with KeyboardDetector {
           : RoundButton(
               isFullWidth: true,
               borderRadius: 6,
-              text: '작성 완료',
-              onTap: () {},
+              rightWidget: isLoading
+                  ? const SizedBox(
+                      width: 15,
+                      height: 15,
+                      child: CircularProgressIndicator(),
+                    )
+                  : null,
+              text: isLoading ? '저장 중' : '작성 완료',
+              onTap: () {
+                final title = titleController.text;
+                final price = int.parse(priceController.text);
+                final desc = descriptionController.text;
+                setState(() {
+                  isLoading = true;
+                });
+                // 직접 추가
+                // 완성된 데이터를 전달
+              },
             ),
     );
   }
@@ -218,6 +252,29 @@ class _DescEditor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        '자세한 설명'.text.bold.make(),
+        height5,
+        TextField(
+          controller: controller,
+          maxLines: 7,
+          decoration: const InputDecoration(
+            hintText: '에 올릴 게시글 내용을 작성해 주세요.',
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.orange,
+              ),
+            ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
