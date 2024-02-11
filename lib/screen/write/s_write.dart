@@ -66,8 +66,10 @@ class _WriteScreenState extends State<WriteScreen> with KeyboardDetector {
       bottomSheet: isKeyboardOn
           ? null
           : RoundButton(
+              text: isLoading ? '저장 중' : '작성 완료',
               isFullWidth: true,
               borderRadius: 6,
+              isEnabled: isValid,
               rightWidget: isLoading
                   ? const SizedBox(
                       width: 15,
@@ -75,7 +77,6 @@ class _WriteScreenState extends State<WriteScreen> with KeyboardDetector {
                       child: CircularProgressIndicator(),
                     )
                   : null,
-              text: isLoading ? '저장 중' : '작성 완료',
               onTap: () {
                 final title = titleController.text;
                 final price = int.parse(priceController.text);
@@ -89,6 +90,11 @@ class _WriteScreenState extends State<WriteScreen> with KeyboardDetector {
             ),
     );
   }
+
+  bool get isValid =>
+      isNotBlank(titleController.text) &&
+      isNotBlank(priceController.text) &&
+      isNotBlank(descriptionController.text);
 }
 
 /// 이미지 선택 위젯
