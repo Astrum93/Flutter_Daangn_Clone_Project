@@ -1,4 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/common/util/app_keyboard_util.dart';
+import 'package:fast_app_base/common/widget/round_button_theme.dart';
 import 'package:fast_app_base/common/widget/w_round_button.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +11,7 @@ class WriteScreen extends StatefulWidget {
   State<WriteScreen> createState() => _WriteScreenState();
 }
 
-class _WriteScreenState extends State<WriteScreen> {
+class _WriteScreenState extends State<WriteScreen> with KeyboardDetector {
   final List<String> imageList = [];
 
   final titleController = TextEditingController();
@@ -37,21 +39,25 @@ class _WriteScreenState extends State<WriteScreen> {
               onTap: () {},
             ),
             _TitleEditor(titleController),
+            height30,
             _PriceEditor(priceController),
             _DescEditor(descriptionController),
           ],
-        ),
+        ).pSymmetric(h: 15),
       ),
-      bottomSheet: RoundButton(
-        isFullWidth: true,
-        borderRadius: 6,
-        text: '작성 완료',
-        onTap: () {},
-      ),
+      bottomSheet: isKeyboardOn
+          ? null
+          : RoundButton(
+              isFullWidth: true,
+              borderRadius: 6,
+              text: '작성 완료',
+              onTap: () {},
+            ),
     );
   }
 }
 
+/// 이미지 선택 위젯
 class _ImageSelectWidget extends StatelessWidget {
   final List<String> imageList;
   final VoidCallback onTap;
@@ -94,6 +100,7 @@ class _ImageSelectWidget extends StatelessWidget {
   }
 }
 
+/// Title
 class _TitleEditor extends StatelessWidget {
   final TextEditingController controller;
 
@@ -101,21 +108,109 @@ class _TitleEditor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        '제목'.text.bold.make(),
+        height5,
+        TextField(
+          controller: controller,
+          decoration: const InputDecoration(
+            hintText: '제목',
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.orange,
+              ),
+            ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 
-class _PriceEditor extends StatelessWidget {
+/// Price
+class _PriceEditor extends StatefulWidget {
   final TextEditingController controller;
 
   const _PriceEditor(this.controller);
 
   @override
+  State<_PriceEditor> createState() => _PriceEditorState();
+}
+
+class _PriceEditorState extends State<_PriceEditor> {
+  bool isDonateMode = false;
+  final priceNode = FocusNode();
+
+  @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        '거래 방식'.text.bold.make(),
+        Row(
+          children: [
+            RoundButton(
+              text: '판매하기',
+              theme: isDonateMode
+                  ? RoundButtonTheme.whiteWithBlueBorder
+                  : RoundButtonTheme.blue,
+              onTap: () {
+                widget.controller.clear();
+                setState(() {
+                  isDonateMode = false;
+                });
+                delay(() {
+                  AppKeyboardUtil.show(context, priceNode);
+                });
+              },
+            ),
+            RoundButton(
+              text: '나눔하기',
+              theme: !isDonateMode
+                  ? RoundButtonTheme.whiteWithBlueBorder
+                  : RoundButtonTheme.blue,
+              onTap: () {
+                widget.controller.text = '0';
+                setState(() {
+                  isDonateMode = true;
+                });
+              },
+            ),
+          ],
+        ),
+        height5,
+        TextField(
+          focusNode: priceNode,
+          controller: widget.controller,
+          keyboardType: TextInputType.number,
+          enabled: !isDonateMode,
+          decoration: const InputDecoration(
+            hintText: '₩ 가격을 입력 해 주세요.',
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.orange,
+              ),
+            ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 
+/// Description
 class _DescEditor extends StatelessWidget {
   final TextEditingController controller;
 
@@ -123,6 +218,6 @@ class _DescEditor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return const Placeholder();
   }
 }
