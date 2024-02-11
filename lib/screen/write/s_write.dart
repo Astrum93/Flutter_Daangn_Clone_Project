@@ -30,8 +30,12 @@ class _WriteScreenState extends State<WriteScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _ImageSelectWidget(imageList),
+            _ImageSelectWidget(
+              imageList,
+              onTap: () {},
+            ),
             _TitleEditor(titleController),
             _PriceEditor(priceController),
             _DescEditor(descriptionController),
@@ -39,6 +43,8 @@ class _WriteScreenState extends State<WriteScreen> {
         ),
       ),
       bottomSheet: RoundButton(
+        isFullWidth: true,
+        borderRadius: 6,
         text: '작성 완료',
         onTap: () {},
       ),
@@ -46,10 +52,77 @@ class _WriteScreenState extends State<WriteScreen> {
   }
 }
 
-class _ImageSelectWidget {}
+class _ImageSelectWidget extends StatelessWidget {
+  final List<String> imageList;
+  final VoidCallback onTap;
 
-class _TitleEditor {}
+  const _ImageSelectWidget(this.imageList, {required this.onTap});
 
-class _PriceEditor {}
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 100,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            SizedBox(
+              width: 80,
+              height: 80,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.camera_alt),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: imageList.length.toString(),
+                          style: const TextStyle(color: Colors.orange),
+                        ),
+                        const TextSpan(text: '/10')
+                      ],
+                    ),
+                  ),
+                ],
+              ).box.rounded.border(color: Colors.grey).make(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-class _DescEditor {}
+class _TitleEditor extends StatelessWidget {
+  final TextEditingController controller;
+
+  const _TitleEditor(this.controller);
+
+  @override
+  Widget build(BuildContext context) {
+    return Placeholder();
+  }
+}
+
+class _PriceEditor extends StatelessWidget {
+  final TextEditingController controller;
+
+  const _PriceEditor(this.controller);
+
+  @override
+  Widget build(BuildContext context) {
+    return Placeholder();
+  }
+}
+
+class _DescEditor extends StatelessWidget {
+  final TextEditingController controller;
+
+  const _DescEditor(this.controller);
+
+  @override
+  Widget build(BuildContext context) {
+    return Placeholder();
+  }
+}
