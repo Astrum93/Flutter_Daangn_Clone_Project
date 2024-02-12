@@ -8,6 +8,7 @@ import 'package:fast_app_base/entity/product/product_status.dart';
 import 'package:fast_app_base/entity/product/vo_product.dart';
 import 'package:fast_app_base/entity/user/vo_address.dart';
 import 'package:fast_app_base/screen/main/tab/home/provider/post_provider.dart';
+import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,7 +21,7 @@ class WriteScreen extends ConsumerStatefulWidget {
 
 class _WriteScreenState extends ConsumerState<WriteScreen>
     with KeyboardDetector {
-  final List<String> imageList = [];
+  final List<String> imageList = [picSum(442)];
 
   final titleController = TextEditingController();
   final priceController = TextEditingController();
@@ -93,20 +94,25 @@ class _WriteScreenState extends ConsumerState<WriteScreen>
                   isLoading = true;
                 });
                 final list = ref.read(postProvider);
+                final simpleProductPost = SimpleProductPost(
+                  6,
+                  user3,
+                  Product(user3, title, price, ProductStatus.normal, imageList),
+                  title,
+                  const Address('서울시 다트구 플러터동', '플러터동'),
+                  0,
+                  0,
+                  DateTime.now(),
+                );
+
                 ref.read(postProvider.notifier).state = List.of(list)
-                  ..add(
-                    SimpleProductPost(
-                      6,
-                      user3,
-                      Product(
-                          user3, title, price, ProductStatus.normal, imageList),
-                      title,
-                      const Address('서울시 다트구 플러터동', '플러터동'),
-                      0,
-                      0,
-                      DateTime.now(),
-                    ),
-                  );
+                  ..add(simpleProductPost);
+
+                Nav.pop(context);
+                Nav.push(PostDetailScreen(
+                  simpleProductPost.id,
+                  simpleProductPost: simpleProductPost,
+                ));
               },
             ),
     );
