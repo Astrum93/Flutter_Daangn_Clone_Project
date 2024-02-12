@@ -103,7 +103,7 @@ class PostDetailBottomMenu extends StatelessWidget {
           Expanded(
             child: Row(
               children: [
-                Image.asset('$basePath/detail/heart_on.png', height: 25),
+                Image.asset('$basePath/detail/heart_on.png', height: 25).p(20),
                 width30,
                 const VerticalDivider().pSymmetric(v: 15),
                 width30,
@@ -164,19 +164,20 @@ class _ImagePager extends StatelessWidget {
                 )
                 .toList(),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SmoothPageIndicator(
-              controller: pageController,
-              count: simpleProductPost.product.images.length,
-              effect: const JumpingDotEffect(
-                verticalOffset: 10,
-                dotColor: Colors.white54,
-                activeDotColor: Colors.black45,
+          if (simpleProductPost.product.images.length > 1)
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: SmoothPageIndicator(
+                controller: pageController,
+                count: simpleProductPost.product.images.length,
+                effect: const JumpingDotEffect(
+                  verticalOffset: 10,
+                  dotColor: Colors.white54,
+                  activeDotColor: Colors.black45,
+                ),
+                onDotClicked: (index) {},
               ),
-              onDotClicked: (index) {},
-            ),
-          )
+            )
         ],
       ),
     );
@@ -195,7 +196,9 @@ class _AppBar extends StatelessWidget {
       child: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Nav.pop(context);
+            },
             icon: const Icon(Icons.arrow_back_ios_new_rounded,
                 color: Colors.white)),
         actions: [
