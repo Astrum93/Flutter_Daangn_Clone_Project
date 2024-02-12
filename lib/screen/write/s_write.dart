@@ -2,16 +2,24 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/util/app_keyboard_util.dart';
 import 'package:fast_app_base/common/widget/round_button_theme.dart';
 import 'package:fast_app_base/common/widget/w_round_button.dart';
+import 'package:fast_app_base/entity/dummies.dart';
+import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
+import 'package:fast_app_base/entity/product/product_status.dart';
+import 'package:fast_app_base/entity/product/vo_product.dart';
+import 'package:fast_app_base/entity/user/vo_address.dart';
+import 'package:fast_app_base/screen/main/tab/home/provider/post_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class WriteScreen extends StatefulWidget {
+class WriteScreen extends ConsumerStatefulWidget {
   const WriteScreen({super.key});
 
   @override
-  State<WriteScreen> createState() => _WriteScreenState();
+  ConsumerState<WriteScreen> createState() => _WriteScreenState();
 }
 
-class _WriteScreenState extends State<WriteScreen> with KeyboardDetector {
+class _WriteScreenState extends ConsumerState<WriteScreen>
+    with KeyboardDetector {
   final List<String> imageList = [];
 
   final titleController = TextEditingController();
@@ -75,7 +83,7 @@ class _WriteScreenState extends State<WriteScreen> with KeyboardDetector {
                       width: 15,
                       height: 15,
                       child: CircularProgressIndicator(),
-                    )
+                    ).pOnly(right: 80)
                   : null,
               onTap: () {
                 final title = titleController.text;
@@ -84,8 +92,21 @@ class _WriteScreenState extends State<WriteScreen> with KeyboardDetector {
                 setState(() {
                   isLoading = true;
                 });
-                // 직접 추가
-                // 완성된 데이터를 전달
+                final list = ref.read(postProvider);
+                ref.read(postProvider.notifier).state = List.of(list)
+                  ..add(
+                    SimpleProductPost(
+                      6,
+                      user3,
+                      Product(
+                          user3, title, price, ProductStatus.normal, imageList),
+                      title,
+                      const Address('서울시 다트구 플러터동', '플러터동'),
+                      0,
+                      0,
+                      DateTime.now(),
+                    ),
+                  );
               },
             ),
     );

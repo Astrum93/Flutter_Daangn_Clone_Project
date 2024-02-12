@@ -1,7 +1,7 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.dart';
 import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.riverpod.dart';
+import 'package:fast_app_base/screen/main/tab/home/provider/post_provider.dart';
 import 'package:fast_app_base/screen/main/tab/home/w_product_post_item.dart';
 import 'package:fast_app_base/screen/notification/s_notification.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +35,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
 
   @override
   Widget build(BuildContext context) {
+    final postList = ref.watch(postProvider);
     return Column(
       children: [
         AppBar(
@@ -55,7 +56,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
           actions: [
             IconButton(
               onPressed: () {
-                Nav.push(NotificationScreen());
+                Nav.push(const NotificationScreen());
               },
               icon: const Icon(Icons.notifications_none_rounded),
             )
