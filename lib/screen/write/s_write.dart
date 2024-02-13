@@ -137,34 +137,37 @@ class _ImageSelectWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: [
-            SizedBox(
-              width: 80,
-              height: 80,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.camera_alt),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: imageList.length.toString(),
-                          style: const TextStyle(color: Colors.orange),
-                        ),
-                        const TextSpan(text: '/10')
-                      ],
+    return Tap(
+      onTap: onTap,
+      child: SizedBox(
+        height: 100,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              SizedBox(
+                width: 80,
+                height: 80,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.camera_alt),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: imageList.length.toString(),
+                            style: const TextStyle(color: Colors.orange),
+                          ),
+                          const TextSpan(text: '/10')
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ).box.rounded.border(color: Colors.grey).make(),
-            ),
-          ],
+                  ],
+                ).box.rounded.border(color: Colors.grey).make(),
+              ),
+            ],
+          ),
         ),
       ),
     );
