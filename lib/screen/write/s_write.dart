@@ -9,6 +9,7 @@ import 'package:fast_app_base/entity/product/vo_product.dart';
 import 'package:fast_app_base/entity/user/vo_address.dart';
 import 'package:fast_app_base/screen/main/tab/home/provider/post_provider.dart';
 import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
+import 'package:fast_app_base/screen/write/d_select_image_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -62,7 +63,10 @@ class _WriteScreenState extends ConsumerState<WriteScreen>
           children: [
             _ImageSelectWidget(
               imageList,
-              onTap: () {},
+              onTap: () async {
+                /// 옵션 Dialog
+                final selectecSource = await SelectImageSourceDialog().show();
+              },
             ),
             _TitleEditor(titleController),
             height30,
