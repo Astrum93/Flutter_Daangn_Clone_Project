@@ -65,7 +65,7 @@ class _WriteScreenState extends ConsumerState<WriteScreen>
               imageList,
               onTap: () async {
                 /// 옵션 Dialog
-                final selectecSource = await SelectImageSourceDialog().show();
+                final selectedSource = await SelectImageSourceDialog().show();
               },
             ),
             _TitleEditor(titleController),
