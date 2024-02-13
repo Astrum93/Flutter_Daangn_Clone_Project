@@ -21,7 +21,7 @@ class WriteScreen extends ConsumerStatefulWidget {
 
 class _WriteScreenState extends ConsumerState<WriteScreen>
     with KeyboardDetector {
-  final List<String> imageList = [picSum(442)];
+  final List<String> imageList = [];
 
   final titleController = TextEditingController();
   final priceController = TextEditingController();
