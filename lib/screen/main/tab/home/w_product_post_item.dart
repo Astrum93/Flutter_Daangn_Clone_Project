@@ -12,12 +12,23 @@ class ProductPostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Tap(
-      onTap: () {
-        // 상세 페이지 이동
-        Nav.push(PostDetailScreen(post.id, simpleProductPost: post),
-            durationMs: 800, navAni: NavAni.Right);
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTapUp: (detail) {
+        Nav.pushWithRippleEffect(
+            PostDetailScreen(
+              post.id,
+              simpleProductPost: post,
+            ),
+            offset: Offset(detail.globalPosition.dx, detail.globalPosition.dy),
+            durationMs: 800);
       },
+
+      // onTap: () {
+      //   // 상세 페이지 이동
+      //   Nav.push(PostDetailScreen(post.id, simpleProductPost: post),
+      //       durationMs: 800, navAni: NavAni.Right);
+      // },
       child: Stack(
         children: [
           Row(
