@@ -15,8 +15,8 @@ class ProductPostItem extends StatelessWidget {
     return Tap(
       onTap: () {
         // 상세 페이지 이동
-        Nav.pushReplacement(PostDetailScreen(post.id, simpleProductPost: post),
-            durationMs: 800, navAni: NavAni.Right);
+        Nav.pushFromRight(PostDetailScreen(post.id, simpleProductPost: post),
+            prohibitSwipeBack: true);
       },
       child: Stack(
         children: [
