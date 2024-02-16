@@ -15,8 +15,8 @@ class ProductPostItem extends StatelessWidget {
     return Tap(
       onTap: () {
         // 상세 페이지 이동
-        Nav.pushFromRight(PostDetailScreen(post.id, simpleProductPost: post),
-            prohibitSwipeBack: true);
+        Nav.push(PostDetailScreen(post.id, simpleProductPost: post),
+            durationMs: 800, navAni: NavAni.Right);
       },
       child: Stack(
         children: [
@@ -25,9 +25,12 @@ class ProductPostItem extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: CachedNetworkImage(
-                  imageUrl: post.product.images[0],
-                  width: 150,
+                child: Hero(
+                  tag: '${post.id}_${post.product.images[0]}',
+                  child: CachedNetworkImage(
+                    imageUrl: post.product.images[0],
+                    width: 150,
+                  ),
                 ),
               ),
               const Width(10),
