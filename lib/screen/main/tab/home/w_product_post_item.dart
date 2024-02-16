@@ -38,7 +38,11 @@ class ProductPostItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    post.title.text.size(17).bold.make(),
+                    Hero(
+                      tag: '${post.id}_title',
+                      child:
+                          Material(child: post.title.text.size(17).bold.make()),
+                    ),
                     Row(
                       children: [
                         post.address.simpleAddress.text
