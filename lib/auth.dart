@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 
 /// A mock authentication service.
 class DaangnAuth extends ChangeNotifier {
@@ -27,6 +28,24 @@ class DaangnAuth extends ChangeNotifier {
     _signedIn = true;
     notifyListeners();
     return _signedIn;
+  }
+
+  /// 로그인 Guard
+  String? _guard(BuildContext context, GoRouterState state) {
+    final bool signedIn = this.signedIn;
+    final bool signingIn = state.matchedLocation == '/signin';
+
+    // Go to /signin if the user is not signed in
+    if (!signedIn && !signingIn) {
+      return '/signin';
+    }
+    // Go to /books if the user is signed in and tries to go to /signin.
+    else if (signedIn && signingIn) {
+      return '/books';
+    }
+
+    // no redirect
+    return null;
   }
 }
 
