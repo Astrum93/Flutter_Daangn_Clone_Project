@@ -2,6 +2,8 @@ import 'package:fast_app_base/auth.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/theme/custom_theme_app.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
+import 'package:fast_app_base/screen/main/tab/tab_item.dart';
+import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +16,8 @@ class App extends StatefulWidget {
   ///light, dark 테마가 준비되었고, 시스템 테마를 따라가게 하려면 해당 필드를 제거 하시면 됩니다.
   static const defaultTheme = CustomTheme.dark;
   static bool isForeground = true;
+  static final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+      GlobalKey();
 
   const App({super.key});
 
@@ -45,13 +49,14 @@ class AppState extends State<App> with WidgetsBindingObserver {
         return ProviderScope(
           child: DaangnAuthScope(
             notifier: _auth,
-            child: MaterialApp(
+            child: MaterialApp.router(
+              scaffoldMessengerKey: App.scaffoldMessengerKey,
+              routerConfig: _router,
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
               locale: context.locale,
               title: 'Image Finder',
               theme: context.themeType.themeData,
-              home: const MainScreen(),
             ),
           ),
         );
@@ -64,7 +69,7 @@ class AppState extends State<App> with WidgetsBindingObserver {
     routes: <GoRoute>[
       GoRoute(
         path: '/',
-        redirect: (_, __) => '/products',
+        redirect: (_, __) => '/main',
       ),
       GoRoute(
         path: '/signin',
@@ -107,15 +112,8 @@ class AppState extends State<App> with WidgetsBindingObserver {
             path: ':postId',
             builder: (BuildContext context, GoRouterState state) {
               final String postId = state.pathParameters['postId']!;
-              if (state.extra != null) {
-                final post = state.extra as SimpleProductPost;
-                return PostDetailScreenWithRiverpod(
-                  int.parse(postId),
-                  simpleProductPost: post,
-                );
-              } else {
-                return PostDetailScreenWithRiverpod(int.parse(postId));
-              }
+
+              return PostDetailScreen(int.parse(postId));
             },
           ),
         ],

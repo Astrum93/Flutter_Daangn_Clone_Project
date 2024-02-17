@@ -31,7 +31,7 @@ class DaangnAuth extends ChangeNotifier {
   }
 
   /// 로그인 Guard
-  String? _guard(BuildContext context, GoRouterState state) {
+  String? guard(BuildContext context, GoRouterState state) {
     final bool signedIn = this.signedIn;
     final bool signingIn = state.matchedLocation == '/signin';
 
