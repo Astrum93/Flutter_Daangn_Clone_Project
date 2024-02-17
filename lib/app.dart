@@ -4,6 +4,7 @@ import 'package:fast_app_base/common/theme/custom_theme_app.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import 'common/theme/custom_theme.dart';
 
@@ -59,6 +60,74 @@ class AppState extends State<App> with Nav, WidgetsBindingObserver {
       }),
     );
   }
+
+  /// GoRouter
+  late final GoRouter _router = GoRouter(
+    navigatorKey: App.navigatorKey,
+    routes: <GoRoute>[
+      GoRoute(
+        path: '/',
+        redirect: (_, __) => '/main',
+      ),
+      GoRoute(
+        path: '/signin',
+        pageBuilder: (BuildContext context, GoRouterState state) =>
+            FadeTransitionPage(
+          key: state.pageKey,
+          child: Container(
+            color: Colors.green,
+            child: Center(
+              child: RoundButton(
+                text: '로그인',
+                onTap: () {
+                  _auth.signIn('hong', '1234');
+                },
+              ),
+            ),
+          ),
+        ),
+      ),
+      GoRoute(
+        path: '/main',
+        redirect: (_, __) => '/main/home',
+      ),
+      GoRoute(
+        path: '/productPost/:postId',
+        redirect: (BuildContext context, GoRouterState state) =>
+            '/main/home/${state.pathParameters['postId']}',
+      ),
+      GoRoute(
+        path: '/main/:kind(home|localLife|nearMy|chat|my)',
+        pageBuilder: (BuildContext context, GoRouterState state) =>
+            FadeTransitionPage(
+          key: _scaffoldKey,
+          child: MainScreen(
+            firstTab: TabItem.find(state.pathParameters['kind']),
+          ),
+        ),
+        routes: <GoRoute>[
+          GoRoute(
+            path: ':postId',
+            builder: (BuildContext context, GoRouterState state) {
+              final String postId = state.pathParameters['postId']!;
+              if (state.extra != null) {
+                final post = state.extra as SimpleProductPost;
+                return PostDetailScreenWithRiverpod(
+                  int.parse(postId),
+                  simpleProductPost: post,
+                );
+              } else {
+                return PostDetailScreenWithRiverpod(int.parse(postId));
+              }
+            },
+          ),
+        ],
+      ),
+    ],
+    redirect: _auth.guard,
+    refreshListenable: _auth,
+    debugLogDiagnostics: true,
+  );
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
