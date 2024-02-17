@@ -1,3 +1,4 @@
+import 'package:fast_app_base/auth.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/theme/custom_theme_app.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
@@ -23,6 +24,8 @@ class AppState extends State<App> with Nav, WidgetsBindingObserver {
   @override
   GlobalKey<NavigatorState> get navigatorKey => App.navigatorKey;
 
+  final _auth = DaangnAuth();
+
   @override
   void initState() {
     super.initState();
@@ -40,14 +43,17 @@ class AppState extends State<App> with Nav, WidgetsBindingObserver {
     return CustomThemeApp(
       child: Builder(builder: (context) {
         return ProviderScope(
-          child: MaterialApp(
-            navigatorKey: App.navigatorKey,
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            title: 'Image Finder',
-            theme: context.themeType.themeData,
-            home: const MainScreen(),
+          child: DaangnAuthScope(
+            notifier: _auth,
+            child: MaterialApp(
+              navigatorKey: App.navigatorKey,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              title: 'Image Finder',
+              theme: context.themeType.themeData,
+              home: const MainScreen(),
+            ),
           ),
         );
       }),

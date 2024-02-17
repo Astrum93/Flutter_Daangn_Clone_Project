@@ -5,7 +5,7 @@
 import 'package:flutter/widgets.dart';
 
 /// A mock authentication service.
-class BookstoreAuth extends ChangeNotifier {
+class DaangnAuth extends ChangeNotifier {
   bool _signedIn = false;
 
   /// Whether user has signed in.
@@ -30,17 +30,16 @@ class BookstoreAuth extends ChangeNotifier {
   }
 }
 
-/// An inherited notifier to host [BookstoreAuth] for the subtree.
-class BookstoreAuthScope extends InheritedNotifier<BookstoreAuth> {
-  /// Creates a [BookstoreAuthScope].
-  const BookstoreAuthScope({
-    required BookstoreAuth super.notifier,
+/// An inherited notifier to host [DaangnAuth] for the subtree.
+class DaangnAuthScope extends InheritedNotifier<DaangnAuth> {
+  /// Creates a [DaangnAuthScope].
+  const DaangnAuthScope({
+    required DaangnAuth super.notifier,
     required super.child,
     super.key,
   });
 
-  /// Gets the [BookstoreAuth] above the context.
-  static BookstoreAuth of(BuildContext context) => context
-      .dependOnInheritedWidgetOfExactType<BookstoreAuthScope>()!
-      .notifier!;
+  /// Gets the [DaangnAuth] above the context.
+  static DaangnAuth of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<DaangnAuthScope>()!.notifier!;
 }
