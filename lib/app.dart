@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'common/route/transition/fade_transition_page.dart';
 import 'common/theme/custom_theme.dart';
+import 'common/widget/w_round_button.dart';
 
 class App extends StatefulWidget {
-  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-
   ///light, dark 테마가 준비되었고, 시스템 테마를 따라가게 하려면 해당 필드를 제거 하시면 됩니다.
   static const defaultTheme = CustomTheme.dark;
   static bool isForeground = true;
@@ -21,9 +21,8 @@ class App extends StatefulWidget {
   State<App> createState() => AppState();
 }
 
-class AppState extends State<App> with Nav, WidgetsBindingObserver {
-  @override
-  GlobalKey<NavigatorState> get navigatorKey => App.navigatorKey;
+class AppState extends State<App> with WidgetsBindingObserver {
+  final ValueKey<String> _scaffoldKey = const ValueKey<String>('App scaffold');
 
   final _auth = DaangnAuth();
 
@@ -47,7 +46,6 @@ class AppState extends State<App> with Nav, WidgetsBindingObserver {
           child: DaangnAuthScope(
             notifier: _auth,
             child: MaterialApp(
-              navigatorKey: App.navigatorKey,
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
               locale: context.locale,
@@ -63,11 +61,10 @@ class AppState extends State<App> with Nav, WidgetsBindingObserver {
 
   /// GoRouter
   late final GoRouter _router = GoRouter(
-    navigatorKey: App.navigatorKey,
     routes: <GoRoute>[
       GoRoute(
         path: '/',
-        redirect: (_, __) => '/main',
+        redirect: (_, __) => '/products',
       ),
       GoRoute(
         path: '/signin',
