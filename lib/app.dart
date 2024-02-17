@@ -1,12 +1,12 @@
 import 'package:fast_app_base/auth.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/theme/custom_theme_app.dart';
+import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import 'common/route/transition/fade_transition_page.dart';
 import 'common/theme/custom_theme.dart';
@@ -112,8 +112,13 @@ class AppState extends State<App> with WidgetsBindingObserver {
             path: ':postId',
             builder: (BuildContext context, GoRouterState state) {
               final String postId = state.pathParameters['postId']!;
-
-              return PostDetailScreen(int.parse(postId));
+              if (state.extra != null) {
+                final post = state.extra as SimpleProductPost;
+                return PostDetailScreen(int.parse(postId),
+                    simpleProductPost: post);
+              } else {
+                return PostDetailScreen(int.parse(postId));
+              }
             },
           ),
         ],
