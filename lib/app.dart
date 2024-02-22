@@ -19,6 +19,7 @@ class App extends StatefulWidget {
   static bool isForeground = true;
   static final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
       GlobalKey();
+  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
   const App({super.key});
 
@@ -69,6 +70,7 @@ class AppState extends State<App> with WidgetsBindingObserver {
 
   /// GoRouter
   late final GoRouter _router = GoRouter(
+    navigatorKey: App.navigatorKey,
     routes: <GoRoute>[
       GoRoute(
         path: '/',
