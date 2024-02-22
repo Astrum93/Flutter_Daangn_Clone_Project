@@ -35,113 +35,124 @@ class FloatingDaangnButton extends ConsumerWidget {
                   : Colors.transparent,
             ),
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                AnimatedOpacity(
-                  opacity: isExpanded ? 1 : 0,
-                  duration: duration,
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 160,
-                        padding: const EdgeInsets.all(15),
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          color: context.appColors.floatingActionLayer,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          children: [
-                            Tap(
-                                onTap: () {
-                                  context.go('/main/localLife');
-                                },
-                                child: _floatItem(
-                                    '알바', '$basePath/fab/fab_01.png')),
-                            _floatItem('과외/클래스', '$basePath/fab/fab_02.png'),
-                            _floatItem('농수산물', '$basePath/fab/fab_03.png'),
-                            _floatItem('부동산', '$basePath/fab/fab_04.png'),
-                            _floatItem('중고차', '$basePath/fab/fab_05.png'),
-                          ],
-                        ),
-                      ),
-                      height5,
-                      Tap(
-                        onTap: () {
-                          /// 글 작성
-                          Nav.push(const WriteScreen());
-                        },
-                        child: Container(
-                          width: 160,
-                          padding: const EdgeInsets.all(15),
-                          margin: const EdgeInsets.only(right: 15, bottom: 10),
-                          decoration: BoxDecoration(
-                            color: context.appColors.floatingActionLayer,
-                            borderRadius: BorderRadius.circular(10),
+          IgnorePointer(
+            ignoring: isHided,
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  IgnorePointer(
+                    ignoring: !isExpanded,
+                    child: AnimatedOpacity(
+                      opacity: isExpanded ? 1 : 0,
+                      duration: duration,
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 160,
+                            padding: const EdgeInsets.all(15),
+                            margin: const EdgeInsets.only(right: 15),
+                            decoration: BoxDecoration(
+                              color: context.appColors.floatingActionLayer,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              children: [
+                                Tap(
+                                    onTap: () {
+                                      context.go('/main/localLife');
+                                    },
+                                    child: _floatItem(
+                                        '알바', '$basePath/fab/fab_01.png')),
+                                _floatItem(
+                                    '과외/클래스', '$basePath/fab/fab_02.png'),
+                                _floatItem('농수산물', '$basePath/fab/fab_03.png'),
+                                _floatItem('부동산', '$basePath/fab/fab_04.png'),
+                                _floatItem('중고차', '$basePath/fab/fab_05.png'),
+                              ],
+                            ),
                           ),
-                          child: Column(
-                            children: [
-                              _floatItem('내 물건 팔기', '$basePath/fab/fab_06.png'),
-                            ],
+                          height5,
+                          Tap(
+                            onTap: () {
+                              /// 글 작성
+                              Nav.push(const WriteScreen());
+                            },
+                            child: Container(
+                              width: 160,
+                              padding: const EdgeInsets.all(15),
+                              margin:
+                                  const EdgeInsets.only(right: 15, bottom: 10),
+                              decoration: BoxDecoration(
+                                color: context.appColors.floatingActionLayer,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                children: [
+                                  _floatItem(
+                                      '내 물건 팔기', '$basePath/fab/fab_06.png'),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                Tap(
-                  onTap: () {
-                    // final currentTab = ref.read(currentTabProvider);
-                    // debugPrint(currentTab.tabName);
-                    // switch (currentTab) {
-                    //   case TabItem.home:
-                    //   case TabItem.localLife:
-                    //   // 다른 화면 띄우기 가능
-                    //   // TODO: Handle this case.
-                    //   case TabItem.nearMe:
-                    //   // TODO: Handle this case.
-                    //   case TabItem.chat:
-                    //   // TODO: Handle this case.
-                    //   case TabItem.my:
-                    //   // TODO: Handle this case.
-                    // }
-                    ref.read(floatingButtonStateProvider.notifier).toggleMenu();
-                  },
-                  child: AnimatedContainer(
-                    duration: duration,
-                    height: 60,
-                    padding: const EdgeInsets.symmetric(horizontal: 18),
-                    decoration: BoxDecoration(
-                      color: isExpanded
-                          ? context.appColors.floatingActionLayer
-                          : const Color(0xffff791f),
-                      borderRadius: BorderRadius.circular(30),
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        AnimatedRotation(
-                          turns: isExpanded ? 0.125 : 0,
-                          duration: duration,
-                          child: const Icon(Icons.add),
-                        ),
-                        AnimatedWidthCollapse(
-                            visible: !isSmall,
+                  ),
+                  Tap(
+                    onTap: () {
+                      // final currentTab = ref.read(currentTabProvider);
+                      // debugPrint(currentTab.tabName);
+                      // switch (currentTab) {
+                      //   case TabItem.home:
+                      //   case TabItem.localLife:
+                      //   // 다른 화면 띄우기 가능
+                      //   // TODO: Handle this case.
+                      //   case TabItem.nearMe:
+                      //   // TODO: Handle this case.
+                      //   case TabItem.chat:
+                      //   // TODO: Handle this case.
+                      //   case TabItem.my:
+                      //   // TODO: Handle this case.
+                      // }
+                      ref
+                          .read(floatingButtonStateProvider.notifier)
+                          .toggleMenu();
+                    },
+                    child: AnimatedContainer(
+                      duration: duration,
+                      height: 60,
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
+                      decoration: BoxDecoration(
+                        color: isExpanded
+                            ? context.appColors.floatingActionLayer
+                            : const Color(0xffff791f),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          AnimatedRotation(
+                            turns: isExpanded ? 0.125 : 0,
                             duration: duration,
-                            child: '글쓰기'.text.make())
-                      ],
+                            child: const Icon(Icons.add),
+                          ),
+                          AnimatedWidthCollapse(
+                              visible: !isSmall,
+                              duration: duration,
+                              child: '글쓰기'.text.make())
+                        ],
+                      ),
                     ),
-                  ),
-                ).pOnly(
-                    bottom: MainScreenState.bottomNavigationBarHeight +
-                        context.viewPaddingBottom +
-                        10,
-                    right: 20),
-              ],
+                  ).pOnly(
+                      bottom: MainScreenState.bottomNavigationBarHeight +
+                          context.viewPaddingBottom +
+                          10,
+                      right: 20),
+                ],
+              ),
             ),
           )
         ],

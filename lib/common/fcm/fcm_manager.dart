@@ -24,7 +24,7 @@ class FcmManager {
               onTap: () {
                 App.navigatorKey.currentContext!.go(message.data['deeplink']);
               },
-              child: '열기'.text.bold.make().p(20)));
+              child: '열기'.text.bold.white.make().p(20)));
       await controller?.closed;
       ref.read(floatingButtonStateProvider.notifier).showButton();
       // debugPrint(message.toString());
