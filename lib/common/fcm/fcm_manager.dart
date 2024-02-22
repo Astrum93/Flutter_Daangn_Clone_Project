@@ -19,10 +19,10 @@ class FcmManager {
         return;
       }
       ref.read(floatingButtonStateProvider.notifier).hideButton();
-      App.navigatorKey.currentContext?.showSnackbar(title);
-      await sleepAsync(4.seconds);
+      final controller = App.navigatorKey.currentContext?.showSnackbar(title);
+      await controller?.closed;
       ref.read(floatingButtonStateProvider.notifier).showButton();
-      debugPrint(message.toString());
+      // debugPrint(message.toString());
     });
 
     ///
