@@ -32,6 +32,10 @@ class FcmManager {
 
     ///
     /// Background
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      App.navigatorKey.currentContext!.go(message.data['deeplink']);
+    });
+
     ///
     /// Not running -> initial launch
 
