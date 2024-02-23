@@ -50,6 +50,9 @@ class FcmManager {
     }
 
     final token = await FirebaseMessaging.instance.getToken();
+    FirebaseMessaging.instance.onTokenRefresh.listen((event) {
+      /// API로 token 전송
+    });
     debugPrint(token);
   }
 }
