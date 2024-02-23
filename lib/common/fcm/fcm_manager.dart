@@ -38,6 +38,14 @@ class FcmManager {
 
     ///
     /// Not running -> initial launch
+    final firstMessage = await FirebaseMessaging.instance.getInitialMessage();
+    if (firstMessage != null) {
+      await sleepUntil(() => App.navigatorKey.currentContext != null);
+      final context = App.navigatorKey.currentContext;
+      if (context != null && context.mounted) {
+        context.go(firstMessage.data['deeplink']);
+      }
+    }
 
     final token = await FirebaseMessaging.instance.getToken();
     debugPrint(token);
