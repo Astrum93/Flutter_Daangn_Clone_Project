@@ -3,7 +3,6 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/animated_width_collapse.dart';
 import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.riverpod.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
-import 'package:fast_app_base/screen/write/s_write.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -82,7 +81,8 @@ class FloatingDaangnButton extends ConsumerWidget {
                           Tap(
                             onTap: () {
                               /// 글 작성
-                              Nav.push(const WriteScreen());
+                              // Nav.push(const WriteScreen());
+                              context.go('/main/write');
                             },
                             child: Container(
                               width: layerWidth,

@@ -6,6 +6,7 @@ import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
+import 'package:fast_app_base/screen/write/s_write.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -126,6 +127,14 @@ class AppState extends ConsumerState<App> with WidgetsBindingObserver {
           ),
         ],
       ),
+      GoRoute(
+        path: '/main/write',
+        pageBuilder: (BuildContext context, GoRouterState state) =>
+            FadeTransitionPage(
+          key: _scaffoldKey,
+          child: const WriteScreen(),
+        ),
+      )
     ],
     redirect: _auth.guard,
     refreshListenable: _auth,
