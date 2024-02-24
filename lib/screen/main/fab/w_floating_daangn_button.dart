@@ -7,6 +7,8 @@ import 'package:fast_app_base/screen/write/s_write.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../common/language/language.dart';
+
 class FloatingDaangnButton extends ConsumerWidget {
   static const height = 100.0;
 
@@ -51,7 +53,7 @@ class FloatingDaangnButton extends ConsumerWidget {
                       child: Column(
                         children: [
                           Container(
-                            width: 160,
+                            width: layerWidth,
                             padding: const EdgeInsets.all(15),
                             margin: const EdgeInsets.only(right: 15),
                             decoration: BoxDecoration(
@@ -64,13 +66,15 @@ class FloatingDaangnButton extends ConsumerWidget {
                                     onTap: () {
                                       context.go('/main/localLife');
                                     },
-                                    child: _floatItem(
-                                        '알바', '$basePath/fab/fab_01.png')),
+                                    child: _floatItem('part_time',
+                                        '$basePath/fab/fab_01.png')),
                                 _floatItem(
-                                    '과외/클래스', '$basePath/fab/fab_02.png'),
-                                _floatItem('농수산물', '$basePath/fab/fab_03.png'),
-                                _floatItem('부동산', '$basePath/fab/fab_04.png'),
-                                _floatItem('중고차', '$basePath/fab/fab_05.png'),
+                                    'lecture', '$basePath/fab/fab_02.png'),
+                                _floatItem(
+                                    'agriculture', '$basePath/fab/fab_03.png'),
+                                _floatItem(
+                                    'profit', '$basePath/fab/fab_04.png'),
+                                _floatItem('car', '$basePath/fab/fab_05.png'),
                               ],
                             ),
                           ),
@@ -81,7 +85,7 @@ class FloatingDaangnButton extends ConsumerWidget {
                               Nav.push(const WriteScreen());
                             },
                             child: Container(
-                              width: 160,
+                              width: layerWidth,
                               padding: const EdgeInsets.all(15),
                               margin:
                                   const EdgeInsets.only(right: 15, bottom: 10),
@@ -91,8 +95,8 @@ class FloatingDaangnButton extends ConsumerWidget {
                               ),
                               child: Column(
                                 children: [
-                                  _floatItem(
-                                      '내 물건 팔기', '$basePath/fab/fab_06.png'),
+                                  _floatItem('sell_my_thing',
+                                      '$basePath/fab/fab_06.png'),
                                 ],
                               ),
                             ),
@@ -160,6 +164,8 @@ class FloatingDaangnButton extends ConsumerWidget {
     );
   }
 
+  double get layerWidth => currentLanguage == Language.english ? 250 : 160;
+
   /// 아이템 생성 메서드
   _floatItem(String title, String imagePath) {
     return Row(
@@ -169,7 +175,7 @@ class FloatingDaangnButton extends ConsumerWidget {
           width: 30,
         ),
         const Width(8),
-        title.text.make(),
+        title.tr().text.make(),
       ],
     );
   }
