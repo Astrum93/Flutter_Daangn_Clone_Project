@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
 import 'package:flutter/material.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 class ProductPostItem extends StatelessWidget {
   final SimpleProductPost post;
@@ -41,20 +40,16 @@ class ProductPostItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Hero(
-                      tag: '${post.id}_title',
-                      child:
-                          Material(child: post.title.text.size(17).bold.make()),
-                    ),
+                        tag: '${post.id}_title',
+                        child: Material(
+                            child: post.title.text.size(17).bold.make())),
                     Row(
                       children: [
                         post.address.simpleAddress.text
                             .color(context.appColors.lessImportant)
                             .make(),
                         '•'.text.color(context.appColors.lessImportant).make(),
-                        timeago
-                            .format(post.createdTime,
-                                locale: context.locale.languageCode)
-                            .text
+                        post.createdTime.timeago.text
                             .color(context.appColors.lessImportant)
                             .make()
                       ],
