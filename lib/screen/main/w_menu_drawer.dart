@@ -10,8 +10,6 @@ import '../../../screen/dialog/d_message.dart';
 import '../../common/common.dart';
 import '../../common/language/language.dart';
 import '../../common/theme/custom_theme.dart';
-import '../../common/theme/theme_util.dart';
-import '../../common/widget/w_mode_switch.dart';
 
 class MenuDrawer extends StatefulWidget {
   static const minHeightForScrollView = 380;
@@ -114,16 +112,23 @@ class _MenuDrawerState extends State<MenuDrawer> {
             child: PopupMenuButton<CustomTheme>(
               onSelected: (value) {
                 setState(() {
-                  title = value;
+                  context.changeTheme(value);
                 });
               },
               itemBuilder: (BuildContext context) => CustomTheme.values
-                  .map((e) => PopupMenuItem(
-                        value: e,
-                        child: Text(e),
+                  .map((theme) => PopupMenuItem(
+                        value: theme,
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: theme.color,
+                            ),
+                            Text(theme.name),
+                          ],
+                        ),
                       ))
                   .toList(),
-              child: Text(title),
+              child: Text(context.themeType.name),
             ).pOnly(left: 20),
           ),
           const Height(10),
@@ -149,10 +154,6 @@ class _MenuDrawerState extends State<MenuDrawer> {
         ],
       ),
     );
-  }
-
-  void toggleTheme() {
-    ThemeUtil.toggleTheme(context);
   }
 
   void closeDrawer(BuildContext context) {
