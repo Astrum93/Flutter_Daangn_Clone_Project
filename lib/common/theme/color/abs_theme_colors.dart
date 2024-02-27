@@ -1,6 +1,8 @@
 import 'package:fast_app_base/common/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 
+export 'dart:ui';
+
 export 'package:fast_app_base/common/constant/app_colors.dart';
 
 typedef ColorProvider = Color Function();
