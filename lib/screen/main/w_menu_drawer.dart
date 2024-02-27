@@ -9,6 +9,7 @@ import 'package:simple_shadow/simple_shadow.dart';
 import '../../../screen/dialog/d_message.dart';
 import '../../common/common.dart';
 import '../../common/language/language.dart';
+import '../../common/theme/custom_theme.dart';
 import '../../common/theme/theme_util.dart';
 import '../../common/widget/w_mode_switch.dart';
 
@@ -110,16 +111,19 @@ class _MenuDrawerState extends State<MenuDrawer> {
           isSmallScreen(context) ? const Height(10) : const EmptyExpanded(),
           MouseRegion(
             cursor: SystemMouseCursors.click,
-            child: ModeSwitch(
-              value: context.isDarkMode,
-              onChanged: (value) {
-                ThemeUtil.toggleTheme(context);
+            child: PopupMenuButton<CustomTheme>(
+              onSelected: (value) {
+                setState(() {
+                  title = value;
+                });
               },
-              height: 30,
-              activeThumbImage: Image.asset('$basePath/darkmode/moon.png'),
-              inactiveThumbImage: Image.asset('$basePath/darkmode/sun.png'),
-              activeThumbColor: Colors.transparent,
-              inactiveThumbColor: Colors.transparent,
+              itemBuilder: (BuildContext context) => CustomTheme.values
+                  .map((e) => PopupMenuItem(
+                        value: e,
+                        child: Text(e),
+                      ))
+                  .toList(),
+              child: Text(title),
             ).pOnly(left: 20),
           ),
           const Height(10),
