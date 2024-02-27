@@ -10,20 +10,29 @@ enum CustomTheme {
   dark(
     DarkAppColors(),
     DarkAppShadows(),
+    name: '다크',
+    color: AppColors.veryDarkGrey,
   ),
   light(
     LightAppColors(),
     LightAppShadows(),
+    name: '라이트',
+    color: AppColors.brightGrey,
   ),
   carrot(
     CarrotAppColors(),
     LightAppShadows(),
+    name: '당근',
+    color: AppColors.darkOrange,
   );
 
-  const CustomTheme(this.appColors, this.appShadows);
+  const CustomTheme(this.appColors, this.appShadows,
+      {required this.name, required this.color});
 
   final AbstractThemeColors appColors;
   final AbsThemeShadows appShadows;
+  final String name;
+  final Color color;
 
   ThemeData get themeData {
     switch (this) {
