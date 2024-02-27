@@ -119,16 +119,38 @@ class _MenuDrawerState extends State<MenuDrawer> {
                   .map((theme) => PopupMenuItem(
                         value: theme,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
                           children: [
+                            Text(
+                              theme.name,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             CircleAvatar(
+                              radius: 10,
                               backgroundColor: theme.color,
                             ),
-                            Text(theme.name),
                           ],
                         ),
                       ))
                   .toList(),
-              child: Text(context.themeType.name),
+              child: Row(
+                children: [
+                  Text(
+                    context.themeType.name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Width(10),
+                  CircleAvatar(
+                    radius: 10,
+                    backgroundColor: context.themeType.color,
+                  ),
+                ],
+              ),
             ).pOnly(left: 20),
           ),
           const Height(10),
