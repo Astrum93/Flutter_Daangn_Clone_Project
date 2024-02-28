@@ -1,9 +1,9 @@
 import 'package:fast_app_base/common/cli_common.dart';
-import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
+import 'package:fast_app_base/entity/post/vo_simple_product_post.gen.dart';
 import 'package:fast_app_base/entity/product/product_status.dart';
-import 'package:fast_app_base/entity/product/vo_product.dart';
-import 'package:fast_app_base/entity/user/vo_address.dart';
-import 'package:fast_app_base/entity/user/vo_user.dart';
+import 'package:fast_app_base/entity/product/vo_product.gen.dart';
+import 'package:fast_app_base/entity/user/vo_address.gen.dart';
+import 'package:fast_app_base/entity/user/vo_user.gen.dart';
 
 /// 이미지 생성 함수
 String picSum(int id) {

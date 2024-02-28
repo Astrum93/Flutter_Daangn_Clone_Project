@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/entity/user/vo_address.dart';
+import 'package:fast_app_base/entity/user/vo_address.gen.dart';
 import 'package:flutter/material.dart';
 
-import '../../../entity/user/vo_user.dart';
+import '../../../entity/user/vo_user.gen.dart';
 
 class UserProfileWidget extends StatelessWidget {
   final User user;

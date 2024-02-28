@@ -1,6 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/entity/post/vo_product_post.dart';
-import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
+import 'package:fast_app_base/entity/post/vo_product_post.gen.dart';
+import 'package:fast_app_base/entity/post/vo_simple_product_post.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'vo_user.freezed.dart';
+part 'vo_user.gen.freezed.dart';
 
 @freezed
 class User with _$User {

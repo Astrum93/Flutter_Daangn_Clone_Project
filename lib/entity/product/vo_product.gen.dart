@@ -1,9 +1,9 @@
 import 'package:fast_app_base/entity/product/product_status.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../user/vo_user.dart';
+import '../user/vo_user.gen.dart';
 
-part 'vo_product.freezed.dart';
+part 'vo_product.gen.freezed.dart';
 
 @freezed
 class Product with _$Product {

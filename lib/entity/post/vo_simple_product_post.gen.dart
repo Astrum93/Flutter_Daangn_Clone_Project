@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../product/vo_product.dart';
-import '../user/vo_address.dart';
-import '../user/vo_user.dart';
+import '../product/vo_product.gen.dart';
+import '../user/vo_address.gen.dart';
+import '../user/vo_user.gen.dart';
 
-part 'vo_simple_product_post.freezed.dart';
+part 'vo_simple_product_post.gen.freezed.dart';
 
 @freezed
 class SimpleProductPost with _$SimpleProductPost {

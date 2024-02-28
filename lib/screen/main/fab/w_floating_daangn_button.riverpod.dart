@@ -1,4 +1,4 @@
-import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.state.dart';
+import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.state.gen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// 기존의 State

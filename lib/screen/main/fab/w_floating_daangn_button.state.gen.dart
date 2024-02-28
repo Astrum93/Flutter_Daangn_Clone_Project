@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'w_floating_daangn_button.state.freezed.dart';
+part 'w_floating_daangn_button.state.gen.freezed.dart';
 
 @freezed
 class FloatingButtonState with _$FloatingButtonState {

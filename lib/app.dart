@@ -2,7 +2,7 @@ import 'package:fast_app_base/auth.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/fcm/fcm_manager.dart';
 import 'package:fast_app_base/common/theme/custom_theme_app.dart';
-import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
+import 'package:fast_app_base/entity/post/vo_simple_product_post.gen.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';

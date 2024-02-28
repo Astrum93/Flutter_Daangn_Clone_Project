@@ -4,7 +4,7 @@ import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/notification/vo/notification%20_dummies.dart';
 import 'package:fast_app_base/screen/notification/vo/vo_notification.dart';
 
-import '../../entity/post/vo_product_post.dart';
+import '../../entity/post/vo_product_post.gen.dart';
 import '../simple_result.dart';
 
 class DaangnApi {

@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_round_button.dart';
-import 'package:fast_app_base/entity/post/vo_product_post.dart';
-import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
+import 'package:fast_app_base/entity/post/vo_product_post.gen.dart';
+import 'package:fast_app_base/entity/post/vo_simple_product_post.gen.dart';
 import 'package:fast_app_base/screen/post_detail/provider/product_post_provider.dart';
 import 'package:fast_app_base/screen/post_detail/provider/w_post_content.dart';
 import 'package:fast_app_base/screen/post_detail/provider/w_user_profile.dart';
@@ -11,7 +11,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../entity/product/vo_product.dart';
+import '../../entity/product/vo_product.gen.dart';
 
 class PostDetailScreen extends ConsumerWidget {
   final SimpleProductPost? simpleProductPost;
