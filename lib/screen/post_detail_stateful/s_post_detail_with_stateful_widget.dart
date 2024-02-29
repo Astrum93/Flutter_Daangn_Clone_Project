@@ -3,7 +3,7 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_round_button.dart';
 import 'package:fast_app_base/entity/post/vo_product_post.gen.dart';
 import 'package:fast_app_base/entity/post/vo_simple_product_post.gen.dart';
-import 'package:fast_app_base/screen/post_detail_riverpod/provider/product_post_provider.dart';
+import 'package:fast_app_base/screen/post_detail_stateful/state/product_post_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,30 +13,62 @@ import '../../entity/product/vo_product.gen.dart';
 import '../post_detail_stateful/w_post_content.dart';
 import '../post_detail_stateful/w_user_profile.dart';
 
-class PostDetailScreen extends ConsumerWidget {
-  final SimpleProductPost? simpleProductPost;
+abstract interface class PostIdProvidedScreen implements StatefulWidget {
+  int get id;
+}
+
+class DetailScreen extends StatefulWidget implements PostIdProvidedScreen {
+  @override
   final int id;
 
-  const PostDetailScreen(
+  const DetailScreen(this.id, {super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return DetailScreenState();
+  }
+}
+
+class DetailScreenState extends State<DetailScreen> with ProductPostState {
+  @override
+  Widget build(BuildContext context) {
+    return productPost == null
+        ? const CircularProgressIndicator()
+        : productPost!.content.text.make();
+  }
+}
+
+class PostDetailScreenWithStatefulWidget extends ConsumerStatefulWidget
+    implements PostIdProvidedScreen {
+  final SimpleProductPost? simpleProductPost;
+  @override
+  final int id;
+
+  const PostDetailScreenWithStatefulWidget(
     this.id, {
     super.key,
     this.simpleProductPost,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final productPost = ref.watch(productPostProvider(id));
+  ConsumerState createState() => _PostDetailScreenState();
+}
 
-    return productPost.when(
-      data: (data) => _PostDetail(simpleProductPost ?? data.simpleProductPost,
-          productPost: data),
-      error: (error, trace) => '에러발생'.text.make(),
-      loading: () => simpleProductPost != null
-          ? _PostDetail(simpleProductPost!)
-          : const Center(
-              child: CircularProgressIndicator(),
-            ),
-    );
+class _PostDetailScreenState
+    extends ConsumerState<PostDetailScreenWithStatefulWidget>
+    with ProductPostState {
+  @override
+  Widget build(BuildContext context) {
+    return productPost == null
+        ? widget.simpleProductPost != null
+            ? _PostDetail(widget.simpleProductPost!)
+            : const Center(
+                child: CircularProgressIndicator(),
+              )
+        : _PostDetail(
+            widget.simpleProductPost ?? productPost!.simpleProductPost,
+            productPost: productPost,
+          );
   }
 }
 
@@ -50,6 +82,7 @@ class _PostDetail extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final pageController = usePageController();
+
     return Material(
       child: Stack(
         children: [
@@ -60,16 +93,25 @@ class _PostDetail extends HookWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _ImagePager(
-                    pageController: pageController,
-                    simpleProductPost: simpleProductPost,
-                  ),
+                      pageController: pageController,
+                      simpleProductPost: simpleProductPost),
                   UserProfileWidget(
                     simpleProductPost.product.user,
                     address: simpleProductPost.address,
                   ),
-                  PostContent(
-                      simpleProductPost: simpleProductPost,
-                      productPost: productPost),
+                  Tap(
+                      onTap: () {
+                        Nav.push(
+                            PostDetailScreenWithStatefulWidget(
+                              simpleProductPost.id,
+                              simpleProductPost: simpleProductPost,
+                            ),
+                            context: context,
+                            durationMs: 800);
+                      },
+                      child: PostContent(
+                          simpleProductPost: simpleProductPost,
+                          productPost: productPost))
                 ],
               ),
             ),
@@ -78,7 +120,7 @@ class _PostDetail extends HookWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: PostDetailBottomMenu(simpleProductPost.product),
-          )
+          ),
         ],
       ),
     );
