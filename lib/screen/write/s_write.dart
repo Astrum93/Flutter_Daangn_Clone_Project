@@ -11,11 +11,12 @@ import 'package:fast_app_base/entity/product/product_status.dart';
 import 'package:fast_app_base/entity/product/vo_product.gen.dart';
 import 'package:fast_app_base/entity/user/vo_address.gen.dart';
 import 'package:fast_app_base/screen/main/tab/home/provider/post_provider.dart';
-import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
 import 'package:fast_app_base/screen/write/d_select_image_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../post_detail_riverpod/s_post_detail_with_riverpod.dart';
 
 class WriteScreen extends ConsumerStatefulWidget {
   const WriteScreen({super.key});
