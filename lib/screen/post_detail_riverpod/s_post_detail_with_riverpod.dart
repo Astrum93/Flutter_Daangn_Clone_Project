@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:daangn_ui/widget/w_round_button.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/w_round_button.dart';
 import 'package:fast_app_base/entity/post/vo_product_post.gen.dart';
 import 'package:fast_app_base/entity/post/vo_simple_product_post.gen.dart';
 import 'package:fast_app_base/screen/post_detail_riverpod/provider/product_post_provider.dart';
