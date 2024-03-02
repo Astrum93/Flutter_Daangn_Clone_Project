@@ -1,3 +1,4 @@
+import 'package:daangn_ui/common/constant/default_font.dart';
 import 'package:daangn_ui/common/theme/custom_theme.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fast_app_base/screen/opensource/s_opensource.dart';
