@@ -12,6 +12,7 @@ import 'package:fast_app_base/screen/write/s_write.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'common/data/preference/prefs.dart';
 import 'common/route/transition/fade_transition_page.dart';
 
 class App extends ConsumerStatefulWidget {
@@ -50,6 +51,8 @@ class AppState extends ConsumerState<App> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return CustomThemeApp(
+      defaultTheme: CustomTheme.dark,
+      savedTheme: Prefs.appTheme.get(),
       child: Builder(builder: (context) {
         return DaangnAuthScope(
           notifier: _auth,
