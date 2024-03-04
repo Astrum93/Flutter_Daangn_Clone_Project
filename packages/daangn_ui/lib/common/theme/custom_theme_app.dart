@@ -32,6 +32,7 @@ class _CustomThemeAppState extends State<CustomThemeApp> {
 
   void handleChangeTheme(CustomTheme theme) {
     setState(() => this.theme = theme);
+    CustomThemeApp.saveThemeFunction(theme);
   }
 
   @override
